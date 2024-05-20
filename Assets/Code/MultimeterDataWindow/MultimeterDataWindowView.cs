@@ -1,12 +1,12 @@
 using Code.Multimeter;
 using UnityEngine;
 
-namespace Code.Ui
+namespace Code.MultimeterDataWindow
 {
-    public class MultimeterWindow : MonoBehaviour
+    public class MultimeterDataWindowView : MonoBehaviour
     {
         [SerializeField] private SectionBlock[] _sectionBlocks;
-
+        
         public void UpdateResult(float value, SectionType sectionType)
         {
             for (int i = 0, len = _sectionBlocks.Length; i < len; ++i)

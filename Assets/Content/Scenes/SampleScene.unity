@@ -439,7 +439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameUpdate: {fileID: 2044092264}
   _multimeterView: {fileID: 5798351196564783093}
-  _multimeterWindow: {fileID: 1299600928}
+  _multimeterDataWindowView: {fileID: 1299600928}
   _multimeterSettings: {fileID: 11400000, guid: e9d907f76bd961d42943c394640ee15c, type: 2}
 --- !u!1 &339709413
 GameObject:
@@ -1291,7 +1291,7 @@ GameObject:
   - component: {fileID: 1299600927}
   - component: {fileID: 1299600928}
   m_Layer: 5
-  m_Name: MultimeterWindow
+  m_Name: MultimeterDataWindowView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1327,7 +1327,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1299600926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3192d67a15678f94993b1ae7a8e073a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b0c79f1df91d8c4ea0e85accdd92734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _sectionBlocks:

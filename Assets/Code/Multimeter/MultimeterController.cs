@@ -1,6 +1,5 @@
 using System;
 using Code.InputControlling;
-using Code.Ui;
 
 namespace Code.Multimeter
 {
@@ -8,15 +7,13 @@ namespace Code.Multimeter
     {
         private MultimeterModel _multimeterModel;
         private MultimeterView _multimeterView;
-        private MultimeterWindow _multimeterWindow;
         private ScrollHandler _scrollHandler;
 
         public MultimeterController(MultimeterModel multimeterModel, MultimeterView multimeterView, 
-            MultimeterWindow multimeterWindow, ScrollHandler scrollHandler)
+           ScrollHandler scrollHandler)
         {
             _multimeterModel = multimeterModel;
             _multimeterView = multimeterView;
-            _multimeterWindow = multimeterWindow;
             _scrollHandler = scrollHandler;
         }
 
@@ -39,26 +36,8 @@ namespace Code.Multimeter
 
         private void OnSectionSwitched(SectionType sectionType)
         {
-            var result = 0f;
-            
-            switch (sectionType)
-            {
-                case SectionType.Resistance:
-                    result = _multimeterModel.Resistance;
-                    break;
-                case SectionType.AcVoltage:
-                    result = _multimeterModel.ACVoltage;
-                    break;
-                case SectionType.CurrentPower:
-                    result = _multimeterModel.CurrentPower;
-                    break;
-                case SectionType.DcVoltage:
-                    result = _multimeterModel.DcVoltage;
-                    break;
-            }
-            
+            var result = _multimeterModel.GetMultimeterResult(sectionType);
             _multimeterView.ResultTextUpdate(result);
-            _multimeterWindow.UpdateResult(result, sectionType);
         }
         
         public void Dispose()

@@ -3,7 +3,7 @@ using Code.Multimeter;
 using TMPro;
 using UnityEngine;
 
-namespace Code.Ui
+namespace Code.MultimeterDataWindow
 {
     public class SectionBlock : MonoBehaviour
     {

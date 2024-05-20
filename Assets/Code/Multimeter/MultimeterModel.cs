@@ -3,19 +3,20 @@ using UnityEngine;
 
 namespace Code.Multimeter
 {
-    public class MultimeterModel 
+    public class MultimeterModel
     {
-        public float Resistance { get; private set; }
-        public float Power { get; private set; }
-        public float ACVoltage { get; private set; }
-        public float CurrentPower { get; private set; }
-        public float DcVoltage { get; private set; }
+        public event Action<float, SectionType> ResultCalculated; 
+        private float _resistance;
+        private float _power;
+        private float _aCVoltage;
+        private float _currentPower;
+        private float _dcVoltage;
         
         public void Init(MultimeterSettings multimeterSettings)
         {
-            Resistance = multimeterSettings.Resistance;
-            Power = multimeterSettings.Power;
-            ACVoltage = multimeterSettings.AcVoltage;
+            _resistance = multimeterSettings.Resistance;
+            _power = multimeterSettings.Power;
+            _aCVoltage = multimeterSettings.AcVoltage;
             Calculate();
         }
 
@@ -24,15 +25,39 @@ namespace Code.Multimeter
             CalculateCurrentPower();
             CalculateDcVoltage();
         }
+
+        public float GetMultimeterResult(SectionType sectionType)
+        {
+            var result = 0f;
+
+            switch (sectionType)
+            {
+                case SectionType.Resistance:
+                    result = _resistance;
+                    break;
+                case SectionType.AcVoltage:
+                    result = _aCVoltage;
+                    break;
+                case SectionType.CurrentPower:
+                    result = _currentPower;
+                    break;
+                case SectionType.DcVoltage:
+                    result = _dcVoltage;
+                    break;
+            }
+
+            ResultCalculated?.Invoke(result, sectionType);
+            return result;
+        }
         
         private void CalculateCurrentPower()
         {
-            CurrentPower = Round(Mathf.Sqrt(Power / Resistance));
+            _currentPower = Round(Mathf.Sqrt(_power / _resistance));
         }
 
         private void CalculateDcVoltage()
         {
-            DcVoltage  = Round(Mathf.Sqrt(Power * Resistance));
+            _dcVoltage  = Round(Mathf.Sqrt(_power * _resistance));
         }
         
         private float Round(float value)
